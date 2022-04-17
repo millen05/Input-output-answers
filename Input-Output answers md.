@@ -1,0 +1,54 @@
+How many times did the LEDs flash if SW2 was held is quickly pressed and released? Do the LEDS keep flashing when SW2 is held? Explain why this happens when SW2 is held?
+It flashed once for each LED. Yes, the LEDs keep flashing because the While loop is set to 1 which means the loop will run as soon as SW2 is held.
+
+Explain the difference between the statements: LED3 = 0; and LED3 = 1;
+LED3 = 0 means that the LED will not turn on and LED3 = 1 means the LED will turn on
+
+What voltage do you expect the microcontroller to output to LED D3 when the statement LED3 = 0; runs? What voltage do you expect the output to be when the statement LED3 = 1; runs?
+The output will be 0V to the LED when the statement LED3 = 0; runs and the output will be 1V to the LED when the statement LED3 = 1;
+
+The statement 'if(SW2 == 0)' uses two equal signs, while the statement 'LED3 = 1;' uses a single equal sign. What operation is performed by one equal sign? What operation is performed by two equal signs?
+Two equal signs asks if "a" and "b" are equivalent.
+
+The following program code includes instructions that write to the PORTC output latches directly. Try it by copying and pasting this code below the existing SW2 'if' structure, at the location shown by the comment. What happens when pushbutton SW3 is pressed? Identify at least one advantage and one disadvantage of controlling the LEDs using 'LATC' write rather than through individual 'LEDn = x;' statements. 
+The four LEDs flash when SW3 is pressed. One disadvantage is that the LEDs will remain on continuously; on the other hand, you will not need to hold SW3 to turn them on.
+
+Press and hold SW3 while pressing and releasing SW4. Does it work as expected? Next, try press and holding SW4 while pressing and releasing SW3. Does it work as expected? Explain the difference in operation between the 'if' and 'while' structures making up the momentary button code.
+Yes, it runs just as predicted. Once SW4 is pushed, the While statement will turn on LED5. If SW3 is pressed, LED4 will turn on; else, LED4 will remain off, according to the If statement.
+
+Does the order of the if conditions matter? (eg. swap the conditional checks for SW3 and SW4)
+No, the order is meaningless, but it would be if two separate LEDs were to be turned on.
+
+Does '&&' work the same way as the nested if structures? Can you think of at least one advantage of using a logical conditional operator instead of nested if structures?
+Since logical conditional operators use at least one If statement, whereas nested if statements use at least two, they are preferable.
+
+Describe the conditions under which LED4 turns on. 
+When SW3 or SW4 is pressed, LED4 lights.\
+
+
+PROGRAMMING ACTIVITIES
+
+
+Try changing the delay values in both of the __delay_us(); functions Does the pitch of the tone increase or decrease if the delay value is made smaller?
+The beeper's pitch increases as the value decreases.
+
+One difference between this code and the code in 2, above, is the state of the BEEPER pin when SW5 is released. What state will the BEEPER output be in after this code runs? While one advantage of this method is smaller code, can you think of one or more disadvantages based on its output when the button is released?
+The beeper will stop beeping immediately. One disadvantage is that if you don't hold the button down while playing a melody, the beeper will switch off.
+
+Test each of your flashing patterns. Describe what happens when more than one button is held. Do all of the patterns try to flash the LEDs at the same time, or sequentially? Explain why this is.
+ Since the Delay statement in an if statement makes the pattern output till it is completed with that piece of code, it will go to the next if statement while the relevant button is held, the LED patterns flash one after the other.
+
+Test each tone by pressing each button individually. Next, press two or more buttons at the same time. Describe what the tone waveform would look like when more than one button is held. 
+The various tones are layered on top of each other.
+ 
+ Use individual 'if' structures to simulate 'Start' and 'Stop' buttons for an industrial machine. LED D4 should turn on when SW3 is pressed, stay on even after SW3 is released, and turn off when SW4 is pressed. Test your program to make sure it works.
+
+Running your program from 6, above, describe what happens when both SW3 and SW4 are pressed. Does LED D4 stay on? If so, how does the brightness of LED D4 compare between its normal on state following SW3 being pressed to this new state when both SW3 and SW4 are bing held? Can you explain why it changes?
+Because SW3 is supplying power to the LED and SW4 is lowering power to the LED, the LED dims in brightness.
+
+As you can imagine, an industrial machine that is able to turn on even while its 'Stop' button is pressed represents a significant safety hazard. Using a logical conditional operator, modify the start-stop program from activity 5 to make it safer. SW3 should only turn on LED D4 if SW4 is released.
+ //Industrial machine Start and Stop (The safe way) while(SW4 == 1) { if(SW3 == 0) { LED4 = 1;
+} } if(SW4 ==0) { LED4 = 0; }
+ 
+LED D1 is normally used to indicate that a program is running, but it can be controlled by your program as well. If you take a look at the UBMP4 schematic, you will see that LED D1's cathode (or negative) pin is connected to the microcontroller instead of the anode (positive) pin as with the other LEDs. This means that you need to make D1's output a zero to turn D1 on. Try it! Make a program that controls or flashes LED D1.
+*/ //Messing around With LED1 if(SW3 == 0) { LED1 = 0; __delay_ms(50); LED1 = 1; __delay_ms(50);
